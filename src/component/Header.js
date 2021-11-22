@@ -15,7 +15,7 @@ const Header = () => {
             <input type="checkbox" id='nav-chk' />
             <label htmlFor="nav-chk" className="show-navlink-btn"><FontAwesomeIcon icon={faBars} /></label>
             <ul className="navlinks">
-                {user? <li onClick={() => navigate('/settings')}><FontAwesomeIcon icon={faUserCog} /> {user.name}</li> : <li><Link to='/register'>Register</Link></li>}
+                {user? <li /*onClick={() => navigate('/settings')}*/><FontAwesomeIcon icon={faUserCog} /> {user.name}</li> : <li><Link to='/register'>Register</Link></li>}
                 {user? <li onClick={() => logoutUser()}><FontAwesomeIcon icon={faSignOutAlt} /> Logout</li> : <li><Link to='/login'>Login</Link></li>}
                 <label htmlFor="nav-chk" className='hide-navlink-btn'><FontAwesomeIcon icon={faTimes} /></label>
             </ul>
