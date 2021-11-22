@@ -39,6 +39,10 @@ body,
     color: #fff;
 }
 
+.container {
+    flex: 1 1 auto;
+}
+
 
 /* Header */
 
@@ -273,6 +277,7 @@ header {
     flex-flow: column;
     background-color: rgb(34, 34, 34);
     color: #fff;
+    overscroll-behavior: contain;
 }
 
 .room-detail {
@@ -617,6 +622,7 @@ header {
         background-color: var(--chatbox-color);
         z-index: 99999;
         transition: .3s;
+        overscroll-behavior: contain;
     }
     #nav-chk:checked~.navlinks {
         right: 0;
