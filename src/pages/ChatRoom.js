@@ -13,10 +13,10 @@ const ChatRoom = ({uid}) => {
 
     const [roomDetail, setRoomDetail] = useState([])
     const [messages, setMessages] = useState([])
-
     let navigate = useNavigate()
 
     const divRef = useRef(null)
+    const emojiRef = useRef()
 
     let getRoomDetail = async () => {
         try {
@@ -106,12 +106,12 @@ const ChatRoom = ({uid}) => {
 
     let showEmoji = () => {
         let emojis = document.querySelector('.emojis')
-        emojis.style.display = 'block'
+        emojis.style.top = '-'+ emojis.clientHeight + 'px'
     }
 
     let hideEmoji = () => {
         let emojis = document.querySelector('.emojis')
-        emojis.style.display = 'none'
+        emojis.style.top = '0'
     }
 
     let exitRoom = () => {
@@ -227,7 +227,7 @@ const ChatRoom = ({uid}) => {
             </div>
             
             <div className="chat-form-container">
-            <Emojis/>
+            <Emojis />
             <form className='chat-form' onSubmit={(e) => sendMessage(e)}>
                 <button type="button" className="show-emoji-btn" onClick={() => showEmoji()}><FontAwesomeIcon icon={faSmile} /></button>
                 <textarea id='id_message' placeholder='Enter a message' required onKeyPress={(e)=>handleInputChange(e)}></textarea>

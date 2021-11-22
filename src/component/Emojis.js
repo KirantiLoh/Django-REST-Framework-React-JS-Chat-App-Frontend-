@@ -1,5 +1,5 @@
 import React from 'react'
-import { useRef } from 'react'
+import { useRef, useState,useEffect } from 'react'
 
 const Emojis = () => {
 
@@ -11,7 +11,7 @@ const Emojis = () => {
     }
 
     return (
-        <div className="emojis" ref={emojisRef}>
+        <div className="emojis" ref={emojisRef} >
                     <span onClick={() => addEmojiToChat('😀')}>😀</span>
                     <span onClick={() => addEmojiToChat('😃')}>😃</span>
                     <span onClick={() => addEmojiToChat('😄')}>😄</span>

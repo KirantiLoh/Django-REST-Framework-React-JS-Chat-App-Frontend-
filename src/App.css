@@ -18,6 +18,7 @@ body,
 #root,
 .App {
     min-height: 100vh;
+    overflow: hidden;
     overscroll-behavior: contain;
 }
 
@@ -446,13 +447,14 @@ header {
 
 #id_message {
     border: none;
-    width: 85%;
+    width: 80%;
     display: inline;
     height: 40px;
     padding: 10px 5px;
     color: #fff;
     background-color: #4b4b4b;
     resize: none;
+    z-index: 2;
 }
 
 #id_message:focus {
@@ -465,8 +467,9 @@ header {
     color: #fff;
     background-color: #4b4b4b;
     display: inline-block;
-    width: 5%;
+    width: 10%;
     height: 40px;
+    z-index: 2;
 }
 
 .emojis {
@@ -482,12 +485,10 @@ header {
     /* Internet Explorer/Edge */
     background-color: rgba(75, 75, 75, 0.493);
     position: absolute;
-    top: -88px;
-    height: 88px;
     overflow-x: auto;
     width: 100%;
+    top: 0px;
     left: 0;
-    display: none;
     transition: none;
 }
 
@@ -502,6 +503,7 @@ header {
     background-color: #4b4b4b;
     width: 10%;
     height: 40px;
+    z-index: 2;
 }
 
 .empty-chat-room {
