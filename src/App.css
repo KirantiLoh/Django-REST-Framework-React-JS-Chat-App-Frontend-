@@ -625,17 +625,28 @@ header {
     .rooms-container,
     .rooms {
         width: 100%;
+        flex: 1 1 auto;
     }
     /* Chat Room */
     .chat-room {
         position: fixed;
         width: 100%;
+        top: 0;
         left: 0;
         height: 100%;
         display: flex;
         flex-flow: column;
         background-color: rgb(34, 34, 34);
         color: #fff;
+    }
+    .room-detail {
+        flex: 0 1 64px;
+    }
+    .messages {
+        flex: 1 1 auto;
+    }
+    .chat-form-container {
+        flex: 0 1 40px;
     }
     .empty-chat-room {
         display: none;
