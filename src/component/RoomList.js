@@ -11,7 +11,7 @@ const RoomList = () => {
 
     let getRooms = async () => {
         try {
-            let response = await fetch('/api/rooms', {
+            let response = await fetch('https://connectchatapp-backend.herokuapp.com/api/rooms', {
             method: 'GET',
             headers:{
                 'Content-Type' : 'application/json',
@@ -28,7 +28,7 @@ const RoomList = () => {
     let createRoom = async (e) => {
         e.preventDefault()
         try {
-            let response = await fetch('/api/rooms', {
+            let response = await fetch('https://connectchatapp-backend.herokuapp.com/api/rooms', {
                 method:'POST',
                 headers: {
                     'Content-Type':'application/json',

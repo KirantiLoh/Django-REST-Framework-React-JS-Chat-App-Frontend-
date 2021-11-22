@@ -20,7 +20,7 @@ const ChatRoom = ({uid}) => {
 
     let getRoomDetail = async () => {
         try {
-            let response = await fetch(`/api/rooms/${uid}`, {
+            let response = await fetch(`https://connectchatapp-backend.herokuapp.com/api/rooms/${uid}`, {
             method: 'GET',
             headers: {
                 'Content-Type' : 'application/json',
@@ -42,7 +42,7 @@ const ChatRoom = ({uid}) => {
     }
     let sendMessage = async (e) => {
         e.preventDefault()
-        let response = await fetch(`/api/rooms/${uid}`, {
+        let response = await fetch(`https://connectchatapp-backend.herokuapp.com/api/rooms/${uid}`, {
             method: 'POST',
             headers: {
                 'Content-Type' : 'application/json',
@@ -62,7 +62,7 @@ const ChatRoom = ({uid}) => {
     let deleteRoom = async () => {
         let confirmation = window.confirm('Are you sure you want to delete this room?')
         if (confirmation) {
-            let response = await fetch(`/api/rooms/${uid}`, {
+            let response = await fetch(`https://connectchatapp-backend.herokuapp.com/api/rooms/${uid}`, {
             method : 'DELETE',
             headers : {
                 'Content-Type' : 'application/json',
@@ -82,7 +82,7 @@ const ChatRoom = ({uid}) => {
     let renameRoom = async (e) => {
         e.preventDefault()
         try {
-            let response = await fetch(`/api/rooms/${uid}`,
+            let response = await fetch(`https://connectchatapp-backend.herokuapp.com/api/rooms/${uid}`,
             {
                 method: 'PUT',
                 headers: {
