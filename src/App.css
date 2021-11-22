@@ -23,6 +23,7 @@ body,
 .App {
     display: flex;
     flex-flow: column;
+    overscroll-behavior: contain;
 }
 
 ::-webkit-scrollbar {
