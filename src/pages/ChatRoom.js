@@ -33,6 +33,7 @@ const ChatRoom = ({uid}) => {
             setMessages(messages)
         } else {
             navigate('/')
+            alert('The room was deleted...')
             setRoomUid(null)
         }
         } catch (err) {
