@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router'
 import AuthContext from '../context/AuthContext'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft, faPaperPlane, faSmile, faTrashAlt, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft, faPaperPlane, faSmile, faTrashAlt, faTimesCircle, faCog, faTimes, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import Emojis from '../component/Emojis'
 import { faEdit } from '@fortawesome/free-regular-svg-icons'
 
@@ -16,7 +16,6 @@ const ChatRoom = ({uid}) => {
     let navigate = useNavigate()
 
     const divRef = useRef(null)
-    const emojiRef = useRef()
 
     let getRoomDetail = async () => {
         try {
@@ -81,6 +80,7 @@ const ChatRoom = ({uid}) => {
 
     let renameRoom = async (e) => {
         e.preventDefault()
+        let rename_chk = document.querySelector("#rename-chk")
         try {
             let response = await fetch(`https://connectchatapp-backend.herokuapp.com/api/rooms/${uid}`,
             {
@@ -94,6 +94,7 @@ const ChatRoom = ({uid}) => {
             let data = await response.json()
             if (response.status === 200) {
                 getRoomDetail()
+                rename_chk.click()
             } else {
                 alert(data.message)
             }
@@ -104,14 +105,35 @@ const ChatRoom = ({uid}) => {
         }
     }
 
+    let add_member = async (e) => {
+        e.preventDefault()
+        try {
+            let response = await fetch(`https://connectchatapp-backend.herokuapp.com/api/profiles`,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type':'application/json',
+                    'Authorization': 'Bearer '+ String(authToken.access)
+                },
+                body: JSON.stringify({'uid':uid, 'creator':roomDetail.creator, 'user':e.target.id_user.value})
+            })
+            let data = await response.json()
+            alert(data.message)
+        } catch (error) {
+            console.error(error)
+        }
+        e.target.id_user.value = ''
+        document.querySelector('#add-member-chk').click()
+    }
+
     let showEmoji = () => {
         let emojis = document.querySelector('.emojis')
-        emojis.style.top = '-'+ emojis.clientHeight + 'px'
+        emojis.style.display = 'block'
     }
 
     let hideEmoji = () => {
         let emojis = document.querySelector('.emojis')
-        emojis.style.top = '0'
+        emojis.style.display = 'none'
     }
 
     let exitRoom = () => {
@@ -125,60 +147,16 @@ const ChatRoom = ({uid}) => {
     }
 
     let handleOpenRenameForm = () => {
-        let rooms_title = document.querySelector(".rooms-title")
-        let rooms = document.querySelector(".rooms")
-        let room_detail = document.querySelector('.room-detail')
-        let messages = document.querySelector(".messages")
-        let chat_form = document.querySelector(".chat-form-container")
         let rename_chk = document.querySelector("#rename-chk")
-        let create_chk = document.querySelector('#chk')
-        
-        rename_chk.click()
+        let creator_chk = document.querySelector("#creator-chk")
 
-        if (document.querySelector('#rename-chk').checked) {
-            messages.style.filter = "brightness(0.7)"
-            room_detail.style.filter = "brightness(0.7)"
-            chat_form.style.filter = "brightness(0.7)"
-            rooms_title.style.filter = "brightness(0.7)"
-            rooms.style.filter = "brightness(0.7)"
-            create_chk.disabled = true
-        } else {
-            rooms_title.style.filter = "brightness(1)"
-            rooms.style.filter = "brightness(1)"
-            rooms_title.style.filter = "brightness(1)"
-            rooms.style.filter = "brightness(1)"
-            messages.style.filter = "brightness(1)"
-            room_detail.style.filter = "brightness(1)"
-            chat_form.style.filter = "brightness(1)"
-            create_chk.disabled = false
-        }
+        rename_chk.click()
+        creator_chk.click()
     }
 
-    let changeOpenRenameForm = () => {
-        let rooms_title = document.querySelector(".rooms-title")
-        let rooms = document.querySelector(".rooms")
-        let room_detail = document.querySelector('.room-detail')
-        let messages = document.querySelector(".messages")
-        let chat_form = document.querySelector(".chat-form-container")
-        let create_chk = document.querySelector('#chk')
-
-        if (document.querySelector('#rename-chk').checked) {
-            messages.style.filter = "brightness(0.7)"
-            room_detail.style.filter = "brightness(0.7)"
-            chat_form.style.filter = "brightness(0.7)"
-            rooms_title.style.filter = "brightness(0.7)"
-            rooms.style.filter = "brightness(0.7)"
-            create_chk.disabled = true
-        } else {
-            rooms_title.style.filter = "brightness(1)"
-            rooms.style.filter = "brightness(1)"
-            rooms_title.style.filter = "brightness(1)"
-            rooms.style.filter = "brightness(1)"
-            messages.style.filter = "brightness(1)"
-            room_detail.style.filter = "brightness(1)"
-            chat_form.style.filter = "brightness(1)"
-            create_chk.disabled = false
-        }
+    let handleAddMemberClick =() => {
+        document.querySelector('#add-member-chk').click()
+        document.querySelector('#creator-chk').click()
     }
 
     useEffect(() => {
@@ -202,7 +180,20 @@ const ChatRoom = ({uid}) => {
                    <h1 className="exit-room" onClick={() => exitRoom()} ><FontAwesomeIcon icon={faArrowLeft} /></h1>
                     <h1>{roomDetail.name ? roomDetail.name : "..."}</h1> 
                 </div>
-                {(user.name === roomDetail.creator) ? <div className="creator-opt"><h1 className="edit-room-name" onClick={() => handleOpenRenameForm()} ><FontAwesomeIcon icon={faEdit} /> </h1><h1 className="delete-room-btn" onClick={() => deleteRoom()}><FontAwesomeIcon icon={faTrashAlt} /></h1></div> :  <p>Creator : {roomDetail.creator}</p> }
+                {(user.name === roomDetail.creator) ? 
+                <div className="creator-opt-container">
+                    <input type="checkbox" id="creator-chk" />
+                    <label htmlFor="creator-chk" className="show-creator-opt-btn"><FontAwesomeIcon icon={faCog} /></label>
+                    <div className="creator-opt">
+                        <h1 className='title'>Room Settings</h1>
+                        <div>
+                            <h1 className="edit-room-name" onClick={() => handleOpenRenameForm()} ><FontAwesomeIcon icon={faEdit} /> Edit Room Name</h1>
+                            <h1 className="add-member-btn" onClick={() => handleAddMemberClick()}><FontAwesomeIcon icon={faUserPlus} /> Add Member</h1>
+                            <h1 className="delete-room-btn" onClick={() => deleteRoom()}><FontAwesomeIcon icon={faTrashAlt} /> Delete Room</h1>
+                        </div>
+                        <label htmlFor="creator-chk" className='hide-creator-opt-btn'><FontAwesomeIcon icon={faTimes} /></label>
+                    </div>
+                </div> :  <p>Creator : {roomDetail.creator}</p> }
             </div>
             <div className="messages" onClick={() => hideEmoji()}>
             {
@@ -235,7 +226,7 @@ const ChatRoom = ({uid}) => {
             </form>
             </div>
 
-            <input type="checkbox" id="rename-chk" onChange={() => changeOpenRenameForm()} />
+            <input type="checkbox" id="rename-chk"  />
             <form className="rename-form" onSubmit={(e) => renameRoom(e)}>
                 <div className="rename-form-title">
                     <h1>Rename Room</h1>
@@ -244,6 +235,17 @@ const ChatRoom = ({uid}) => {
                 
                 <input type="text" autoComplete="off" placeholder="Room Name" id="id_name" />
                 <button type="submit" className="submit-rename-btn">Rename</button>
+            </form>
+
+            <input type="checkbox" id="add-member-chk"  />
+            <form className="add-member-form" onSubmit={(e) => add_member(e)}>
+                <div className="rename-form-title">
+                    <h1>Add Member</h1>
+                    <label htmlFor="add-member-chk" className="hide-add-member-form"><FontAwesomeIcon icon={faTimesCircle}/></label>
+                </div>
+                
+                <input type="text" autoComplete="off" placeholder="Username" id="id_user" />
+                <button type="submit" className="submit-rename-btn">Add User To Room</button>
             </form>
             
         </div>

@@ -47,6 +47,7 @@ const RoomList = () => {
             console.error(err)
         } finally {
             e.target.id_name.value = ''
+            document.querySelector('#chk').click()
         }
     }
 
@@ -114,7 +115,7 @@ const RoomList = () => {
                 )
                 ): (
                         <div className="empty-room">
-                            <h1>Syncing rooms...</h1>
+                            <p>No room were found, either ask someone to invite you or create a room</p>
                         </div>
                     )}
             </ul> 

@@ -114,6 +114,7 @@ export const AuthProvider = ({children}) => {
         return () => {
             clearInterval(func)
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [authToken, isLoading])
     return (
         <AuthContext.Provider value={contextData}>

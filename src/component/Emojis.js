@@ -1,9 +1,6 @@
 import React from 'react'
-import { useRef, useState,useEffect } from 'react'
 
 const Emojis = () => {
-
-    let emojisRef = useRef()
 
     let addEmojiToChat = (emoji) => {
         let input_field = document.querySelector('#id_message')
@@ -11,7 +8,7 @@ const Emojis = () => {
     }
 
     return (
-        <div className="emojis" ref={emojisRef} >
+        <div className="emojis">
                     <span onClick={() => addEmojiToChat('😀')}>😀</span>
                     <span onClick={() => addEmojiToChat('😃')}>😃</span>
                     <span onClick={() => addEmojiToChat('😄')}>😄</span>

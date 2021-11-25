@@ -26,13 +26,7 @@ body,
 }
 
 ::-webkit-scrollbar {
-    background-color: transparent;
-    width: 0;
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: #4b4b4b;
-    border-radius: 10px;
+    display: none;
 }
 
 ::placeholder {
@@ -112,7 +106,8 @@ header {
 
 .login-form input,
 .create-room-form input,
-.rename-form input {
+.rename-form input,
+.add-member-form input {
     display: block;
     padding: 10px 5px;
     margin: 20px 0;
@@ -125,13 +120,15 @@ header {
 
 .login-form input:focus,
 .create-room-form input:focus,
-.rename-form input:focus {
+.rename-form input:focus,
+.add-member-form:focus {
     outline: none;
 }
 
 .login-form button,
 .create-room-form button,
-.rename-form button {
+.rename-form button,
+.add-member-form button {
     border: 3px #fff solid;
     color: #fff;
     background-color: transparent;
@@ -250,7 +247,8 @@ header {
     justify-content: space-between;
 }
 
-.hide-create-room {
+.hide-create-room,
+.hide-add-member-form {
     margin-left: 30px;
     font-size: 1.5rem;
     cursor: pointer;
@@ -266,6 +264,10 @@ header {
 
 .empty-room {
     padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1 1 auto;
 }
 
 
@@ -278,6 +280,8 @@ header {
     background-color: rgb(34, 34, 34);
     color: #fff;
     overscroll-behavior: contain;
+    overflow: hidden;
+    position: relative;
 }
 
 .room-detail {
@@ -306,9 +310,45 @@ header {
     font-size: 1.5rem;
 }
 
+#creator-chk {
+    display: none;
+}
+
+.show-creator-opt-btn {
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.hide-creator-opt-btn {
+    font-size: 3rem;
+    cursor: pointer;
+}
+
+.show-creator-opt-btn:hover {
+    animation: spin .5s;
+}
+
 .creator-opt {
     display: flex;
     align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    position: absolute;
+    top: 0;
+    right: -150%;
+    background-color: #006b90;
+    width: fit-content;
+    height: calc(100vh - 78px);
+    z-index: 100;
+}
+
+.creator-opt .title {
+    font-size: 2.5rem;
+    padding: 20px;
+}
+
+#creator-chk:checked~.creator-opt {
+    right: 0;
 }
 
 .exit-room {
@@ -323,15 +363,15 @@ header {
 }
 
 .delete-room-btn,
-.edit-room-name {
+.edit-room-name,
+.add-member-btn {
     cursor: pointer;
     transition: .3s;
-    margin: 0 10px;
+    margin: 20px 10px;
 }
 
 .delete-room-btn:hover {
     color: #ff0000;
-    animation: shake .3s;
 }
 
 .messages {
@@ -432,11 +472,12 @@ header {
     margin-top: -10px;
     margin-right: -20px;
 }
-*/
+
 
 .chat-form-container {
     position: relative;
 }
+*/
 
 .chat-form {
     display: flex;
@@ -481,12 +522,9 @@ header {
     /* Firefox */
     -ms-user-select: none;
     /* Internet Explorer/Edge */
+    display: none;
     background-color: rgba(75, 75, 75, 0.493);
-    position: absolute;
-    overflow-x: auto;
     width: 100%;
-    top: 0px;
-    left: 0;
     transition: none;
 }
 
@@ -523,11 +561,13 @@ header {
     font-size: 2rem;
 }
 
-#rename-chk {
+#rename-chk,
+#add-member-chk {
     display: none;
 }
 
-.rename-form {
+.rename-form,
+.add-member-form {
     color: #fff;
     position: fixed;
     top: 50%;
@@ -540,7 +580,8 @@ header {
     transition: .4s;
 }
 
-#rename-chk:checked~.rename-form {
+#rename-chk:checked~.rename-form,
+#add-member-chk:checked~.add-member-form {
     left: 50%;
 }
 
@@ -660,6 +701,8 @@ header {
     }
     .creator-opt {
         font-size: 0.8rem;
+        top: 0;
+        height: 100%;
     }
 }
 
