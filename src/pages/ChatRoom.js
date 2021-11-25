@@ -33,9 +33,11 @@ const ChatRoom = ({uid}) => {
             setMessages(messages)
         } else {
             navigate('/')
+            setRoomUid(null)
         }
         } catch (err) {
             console.error(err)
+            setRoomUid(null)
         }
         
     }
