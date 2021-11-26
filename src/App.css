@@ -107,7 +107,9 @@ header {
 .login-form input,
 .create-room-form input,
 .rename-form input,
-.add-member-form input {
+.add-member-form input,
+.remove-member-form input,
+.remove-member-form select {
     display: block;
     padding: 10px 5px;
     margin: 20px 0;
@@ -118,17 +120,24 @@ header {
     border-bottom: 3px #fff solid;
 }
 
+.remove-member-form option {
+    color: #000;
+}
+
 .login-form input:focus,
 .create-room-form input:focus,
 .rename-form input:focus,
-.add-member-form:focus {
+.add-member-form input:focus,
+.remove-member-form input:focus,
+.remove-member-form select:focus {
     outline: none;
 }
 
 .login-form button,
 .create-room-form button,
 .rename-form button,
-.add-member-form button {
+.add-member-form button,
+.remove-member-form button {
     border: 3px #fff solid;
     color: #fff;
     background-color: transparent;
@@ -207,7 +216,8 @@ header {
     white-space: nowrap;
 }
 
-#chk {
+#chk,
+#remove-member-chk {
     display: none;
 }
 
@@ -364,7 +374,8 @@ header {
 
 .delete-room-btn,
 .edit-room-name,
-.add-member-btn {
+.add-member-btn,
+.remove-member-btn {
     cursor: pointer;
     transition: .3s;
     margin: 20px 10px;
@@ -567,7 +578,8 @@ header {
 }
 
 .rename-form,
-.add-member-form {
+.add-member-form,
+.remove-member-form {
     color: #fff;
     position: fixed;
     top: 50%;
@@ -581,7 +593,8 @@ header {
 }
 
 #rename-chk:checked~.rename-form,
-#add-member-chk:checked~.add-member-form {
+#add-member-chk:checked~.add-member-form,
+#remove-member-chk:checked~.remove-member-form {
     left: 50%;
 }
 

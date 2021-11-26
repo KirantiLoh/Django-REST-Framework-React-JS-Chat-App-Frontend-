@@ -38,6 +38,10 @@ export const AuthProvider = ({children}) => {
         } catch(err) {
             console.error(err)
             logoutUser()
+        } finally {
+            e.target.id_username.value = ''
+            e.target.id_password.value = ''
+            setRoomUid(null)
         }
     }
 
@@ -86,6 +90,7 @@ export const AuthProvider = ({children}) => {
     let logoutUser = () => {
         setAuthToken(null)
         setUser(null)
+        setRoomUid(null)
         localStorage.removeItem('authToken')
         navigate('/login')
     }
