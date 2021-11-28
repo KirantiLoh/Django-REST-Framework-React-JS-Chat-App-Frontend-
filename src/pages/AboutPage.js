@@ -2,7 +2,7 @@ import React from 'react'
 import DjangoLogo from '../images/django_logo.png'
 import ReactLogo from '../images/react.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faInstagram, faLinkedin } from '@fortawesome/free-brands-svg-icons'
+import { faGithub, faInstagram, faLinkedin } from '@fortawesome/free-brands-svg-icons'
 
 const AboutPage = () => {
     return (
@@ -31,6 +31,7 @@ const AboutPage = () => {
                 <ul className="sosmed">
                     <li><a href="//www.instagram.com/maurice_yang/"><FontAwesomeIcon icon={faInstagram}/></a></li>
                     <li><a href="//www.linkedin.com/in/maurice-yang"><FontAwesomeIcon icon={faLinkedin} /> </a></li>
+                    <li><a href="//github.com/KirantiLoh"><FontAwesomeIcon icon={faGithub}/></a></li>
                 </ul>
             </div>
         </div>
