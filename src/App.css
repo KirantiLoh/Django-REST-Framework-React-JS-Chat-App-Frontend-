@@ -8,6 +8,7 @@
 
 a {
     color: #fff;
+    text-decoration: none;
 }
 
 :root {
@@ -18,6 +19,7 @@ body,
 #root,
 .App {
     min-height: 100vh;
+    background-color: #4b4b4b;
 }
 
 .App {
@@ -109,7 +111,8 @@ header {
 .rename-form input,
 .add-member-form input,
 .remove-member-form input,
-.remove-member-form select {
+.remove-member-form select,
+#id_chat_background {
     display: block;
     padding: 10px 5px;
     margin: 20px 0;
@@ -129,7 +132,8 @@ header {
 .rename-form input:focus,
 .add-member-form input:focus,
 .remove-member-form input:focus,
-.remove-member-form select:focus {
+.remove-member-form select:focus,
+#id_chat_background {
     outline: none;
 }
 
@@ -137,7 +141,8 @@ header {
 .create-room-form button,
 .rename-form button,
 .add-member-form button,
-.remove-member-form button {
+.remove-member-form button,
+.change-background-form button {
     border: 3px #fff solid;
     color: #fff;
     background-color: transparent;
@@ -399,6 +404,14 @@ header {
     right: 0;
 }
 
+.messages img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    object-fit: cover;
+}
+
 .my-message {
     width: 100%;
     display: flex;
@@ -451,44 +464,6 @@ header {
     color: rgb(173, 173, 173);
     margin: 0 12px;
 }
-
-
-/*
-.their-message .message:after {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 50%;
-    width: 0;
-    height: 0;
-    border: 20px solid transparent;
-    border-right-color: rgb(75, 75, 75);
-    border-left: 0;
-    border-top: 0;
-    margin-top: -10px;
-    margin-left: -20px;
-}
-
-.my-message .message:after {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 50%;
-    width: 0;
-    height: 0;
-    border: 20px solid transparent;
-    border-left-color: var(--chatbox-color);
-    border-right: 0;
-    border-top: 0;
-    margin-top: -10px;
-    margin-right: -20px;
-}
-
-
-.chat-form-container {
-    position: relative;
-}
-*/
 
 .chat-form {
     display: flex;
@@ -604,8 +579,64 @@ header {
 .settings-container {
     flex: 1 1 auto;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    color: #fff;
+}
+
+.settings-container img {
+    width: 300px;
+    height: 100%;
+    margin: 10px auto;
+}
+
+
+/* About Page */
+
+.about-page {
+    color: #fff;
+    width: 100%;
+    flex: 1 1 auto;
+    padding: 10px 20px;
+}
+
+.about-page h1,
+.about-page p {
+    margin: 10px 0;
+}
+
+.about-tech {
+    margin: 20px auto;
+}
+
+.techs {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.tech {
+    text-align: center;
+}
+
+.tech img {
+    height: 200px;
+    width: 100%;
+    margin: 10px;
+}
+
+.sosmed {
+    list-style: none;
+    display: flex;
+}
+
+.sosmed li {
+    margin: 10px;
+    padding: 15px 20px;
+    border-radius: 50%;
+    font-size: 3rem;
+    background-color: var(--chatbox-color);
 }
 
 

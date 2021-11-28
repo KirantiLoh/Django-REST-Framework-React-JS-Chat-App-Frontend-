@@ -4,7 +4,7 @@ import AuthContext from '../context/AuthContext'
 import { useNavigate } from 'react-router'
 import logo from '../images/logo.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faSignOutAlt, faTimes, faUserCog } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faInfoCircle, faSignOutAlt, faTimes, faUserCog } from '@fortawesome/free-solid-svg-icons'
 
 const Header = () => {
     let {user, logoutUser} = useContext(AuthContext)
@@ -15,6 +15,7 @@ const Header = () => {
             <input type="checkbox" id='nav-chk' />
             <label htmlFor="nav-chk" className="show-navlink-btn"><FontAwesomeIcon icon={faBars} /></label>
             <ul className="navlinks">
+                <li onClick={() => navigate('/about')}><FontAwesomeIcon icon={faInfoCircle}/> About</li>
                 {user? <li onClick={() => navigate('/settings')}><FontAwesomeIcon icon={faUserCog} /> {user.name}</li> : <li><Link to='/register'>Register</Link></li>}
                 {user? <li onClick={() => logoutUser()}><FontAwesomeIcon icon={faSignOutAlt} /> Logout</li> : <li><Link to='/login'>Login</Link></li>}
                 <label htmlFor="nav-chk" className='hide-navlink-btn'><FontAwesomeIcon icon={faTimes} /></label>

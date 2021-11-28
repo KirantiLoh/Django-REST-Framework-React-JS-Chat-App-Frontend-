@@ -13,7 +13,7 @@ export const AuthProvider = ({children}) => {
     let [authToken, setAuthToken] = useState(localStorage.getItem("authToken") ? JSON.parse(localStorage.getItem("authToken")) : null)
     let [roomUid, setRoomUid] = useState(null)
     const [isEnteringRoom, setisEnteringRoom] = useState(false)
-
+    const [chatBackground, setChatBackground] = useState(null)
     let navigate = useNavigate()
 
     let loginUser = async (e) => {
@@ -87,11 +87,33 @@ export const AuthProvider = ({children}) => {
         }
     }
 
+    let getChatBackground = async () => {
+        try {
+            let response = await fetch('https://connectchatapp-backend.herokuapp.com/api/profiles', {
+            method: 'GET',
+            headers: {
+                'Content-Type':'application/json',
+                'Authorization': 'Bearer ' + String(authToken.access)
+                }
+            })
+            let data = await response.json()
+            if (response.status === 200) {
+                let image_str = data.image_str
+                setChatBackground(image_str)
+                localStorage.setItem('chatBackground', image_str)
+            }
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
     let logoutUser = () => {
         setAuthToken(null)
         setUser(null)
         setRoomUid(null)
+        setChatBackground(null)
         localStorage.removeItem('authToken')
+        localStorage.removeItem('chatBackground')
         navigate('/login')
     }
 
@@ -104,12 +126,18 @@ export const AuthProvider = ({children}) => {
         roomUid:roomUid,
         setRoomUid:setRoomUid,
         isEnteringRoom:isEnteringRoom,
-        setisEnteringRoom:setisEnteringRoom
+        setisEnteringRoom:setisEnteringRoom,
+        chatBackground:chatBackground,
+        setChatBackground:setChatBackground,
+        getChatBackground:getChatBackground
     }
     useEffect(() => {
         if (isLoading) {
-            refreshToken()
-            setIsLoading(false)
+            if (authToken) {
+                refreshToken()
+                getChatBackground()
+                setIsLoading(false)
+            }
         }
         let func = setInterval(() => {
             if (authToken) { 

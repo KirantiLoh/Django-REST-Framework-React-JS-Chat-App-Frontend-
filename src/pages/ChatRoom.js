@@ -9,7 +9,7 @@ import { faEdit } from '@fortawesome/free-regular-svg-icons'
 
 const ChatRoom = ({uid}) => {
 
-    let {user, authToken, setRoomUid, isEnteringRoom, setisEnteringRoom} = useContext(AuthContext)
+    let {user, authToken, setRoomUid, isEnteringRoom, setisEnteringRoom, chatBackground} = useContext(AuthContext)
 
     const [roomDetail, setRoomDetail] = useState([])
     const [messages, setMessages] = useState([])
@@ -114,7 +114,7 @@ const ChatRoom = ({uid}) => {
     let add_member = async (e) => {
         e.preventDefault()
         try {
-            let response = await fetch(`https://connectchatapp-backend.herokuapp.com/api/profiles`,
+            let response = await fetch(`https://connectchatapp-backend.herokuapp.com/api/rooms/${uid}/members`,
             {
                 method: 'POST',
                 headers: {
@@ -135,7 +135,7 @@ const ChatRoom = ({uid}) => {
     let remove_member = async (e) => {
         e.preventDefault()
         try {
-            let response = await fetch(`https://connectchatapp-backend.herokuapp.com/api/profiles`, {
+            let response = await fetch(`https://connectchatapp-backend.herokuapp.com/api/rooms/${uid}/members`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type':'application/json',
@@ -264,7 +264,8 @@ const ChatRoom = ({uid}) => {
                 </div>
                 
                 <input type="text" autoComplete="off" placeholder="Username" id="id_removing_user" disabled />
-                <select name="" onChange={(e) => handleRemoveMemberChange(e)}>
+                <select defaultValue='Select A Member' onChange={(e) => handleRemoveMemberChange(e)}>
+                    <option value="Select A Member" disabled>Select A Member</option>
                     {members.map((member, index) => {
                         if (member.username === roomDetail.creator) return null;
                         return (
@@ -277,7 +278,7 @@ const ChatRoom = ({uid}) => {
 
                 </div> :  <p>Creator : {roomDetail.creator}</p> }
             </div>
-            <div className="messages" onClick={() => hideEmoji()}>
+            <div className="messages" onClick={() => hideEmoji()} style={{'backgroundImage':'linear-gradient(rgba(0,0,0, 0.4), rgba(0,0,0,0.4)), url('+chatBackground+')','backgroundRepeat':'no-repeat', 'backgroundSize':'cover'}}>
             {
                 messages ? (
                     <ul>
