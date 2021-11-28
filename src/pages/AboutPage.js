@@ -9,7 +9,7 @@ const AboutPage = () => {
         <div className="about-page">
             <div className="about-web">
             <h1>About This Web App</h1>
-            <p>Connect is a chat web app developed by Maurice Yang. Used Django as the backend and React JS as the frontend. Spent 1 month on developing the site</p>
+            <p>Connect is a chat web app developed by Maurice Yang. It uses a room system where people can be invited by another person into a room. The background image of the chat room is completely customizeable. Used Django as the backend and React JS as the frontend. Spent 1 month on developing the site</p>
             </div>
             <div className="about-tech">
                 <h1>Technologies Used</h1>
