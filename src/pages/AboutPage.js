@@ -29,9 +29,9 @@ const AboutPage = () => {
                 <p>Maurice Yang is an aspiring full-stack developer who specializes in Django and React JS</p>
                 <p>Contact him through : </p>
                 <ul className="sosmed">
-                    <li><a href="//www.instagram.com/maurice_yang/"><FontAwesomeIcon icon={faInstagram}/></a></li>
-                    <li><a href="//www.linkedin.com/in/maurice-yang"><FontAwesomeIcon icon={faLinkedin} /> </a></li>
-                    <li><a href="//github.com/KirantiLoh"><FontAwesomeIcon icon={faGithub}/></a></li>
+                    <li><a href="//www.instagram.com/maurice_yang/" rel='noreferrer' target='_blank'><FontAwesomeIcon icon={faInstagram}/></a></li>
+                    <li><a href="//www.linkedin.com/in/maurice-yang" rel='noreferrer' target='_blank'><FontAwesomeIcon icon={faLinkedin} /> </a></li>
+                    <li><a href="//github.com/KirantiLoh" rel='noreferrer' target='_blank'><FontAwesomeIcon icon={faGithub}/></a></li>
                 </ul>
             </div>
         </div>
