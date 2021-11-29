@@ -135,7 +135,6 @@ export const AuthProvider = ({children}) => {
         if (isLoading) {
             if (authToken) {
                 refreshToken()
-                getChatBackground()
                 setIsLoading(false)
             }
         }
@@ -148,7 +147,7 @@ export const AuthProvider = ({children}) => {
             clearInterval(func)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [authToken, isLoading])
+    }, [authToken, isLoading, chatBackground])
     return (
         <AuthContext.Provider value={contextData}>
             {children}

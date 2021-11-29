@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import RoomList from '../component/RoomList'
 import ChatRoom from './ChatRoom'
 import { useContext } from 'react'
@@ -8,7 +8,12 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
 const HomePage = () => {
     
-    let {roomUid} = useContext(AuthContext)
+    let {roomUid, getChatBackground} = useContext(AuthContext)
+
+    useEffect(() => {
+        getChatBackground()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <div className="container">
